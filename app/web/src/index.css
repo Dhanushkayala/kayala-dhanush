@@ -1,0 +1,137 @@
+/*
+  TEMPLATE STYLES: These styles are used as a base template.
+  AI is allowed to modify these styles as needed.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", sans-serif;
+  overflow-x: clip;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.font-display { font-family: "Space Grotesk", sans-serif; }
+.font-mono-ui { font-family: "JetBrains Mono", monospace; }
+
+::selection { background: hsl(var(--accent-editor)); color: #000; }
+
+/* timeline track lines */
+.timeline-track {
+  background-image: repeating-linear-gradient(
+    to right,
+    hsl(var(--track-line)) 0px,
+    hsl(var(--track-line)) 1px,
+    transparent 1px,
+    transparent 80px
+  );
+}
+
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes playhead-sweep {
+  0% { left: 0%; }
+  100% { left: 100%; }
+}
+@keyframes scan {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+.editor-input {
+  width: 100%;
+  background: hsl(var(--input));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.25rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.875rem;
+  color: hsl(var(--foreground));
+  outline: none;
+  transition: border-color .15s;
+}
+.editor-input::placeholder { color: hsl(var(--muted-foreground)); }
+.editor-input:focus { border-color: hsl(var(--accent-editor)); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}
+
+/*
+  ---break---
+*/
+
+@layer base {
+  :root {
+    --background: 220 14% 5%;
+    --foreground: 210 20% 96%;
+    --card: 220 13% 8%;
+    --card-foreground: 210 20% 96%;
+    --popover: 220 14% 6%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 18 100% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 12% 12%;
+    --secondary-foreground: 210 20% 96%;
+    --muted: 220 12% 12%;
+    --muted-foreground: 215 12% 58%;
+    --accent: 18 100% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 12% 16%;
+    --input: 220 12% 14%;
+    --ring: 18 100% 55%;
+    --radius: 0.25rem;
+    --accent-editor: 18 100% 55%;
+    --accent-blue: 199 92% 56%;
+    --track-line: 220 12% 14%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
