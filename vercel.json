@@ -1,3 +1,10 @@
 {
-  "outputDirectory": "app/web/dist"
+  "outputDirectory": "app/web/dist",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
